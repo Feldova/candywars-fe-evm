@@ -1,0 +1,27 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"C:/Work/CandyWarz_alpha/Content/MainMenu/WBP_MainMenu.uasset",
+				"C:/Work/CandyWarz_alpha/Content/MainMenu/pixel_vomit_title_screen.uasset",
+				"C:/Work/CandyWarz_alpha/Content/MainMenu/chatbox_purple.uasset",
+				"C:/Work/CandyWarz_alpha/Content/MainMenu/Images/pixel_vomit_title_screen.uasset",
+				"C:/Work/CandyWarz_alpha/Content/MainMenu/Images/chatbox_purple.uasset",
+				"C:/Work/CandyWarz_alpha/Content/MainMenu/Images/pixel_planet.uasset",
+				"C:/Work/CandyWarz_alpha/Content/MainMenu/WBP_CitySelect.uasset",
+				"C:/Work/CandyWarz_alpha/Content/MainMenu/MainMenu.umap",
+				"D:/work/Unreal Projects/CandyWarz_alpha/Content/StarterContent/Architecture/Floor_400x400.uasset",
+				"D:/work/Unreal Projects/CandyWarz_alpha/Content/MainMenu/MainMenu.umap",
+				"D:/work/Unreal Projects/CandyWarz_alpha/Content/MainMenu/GM_MainMenu.uasset",
+				"D:/work/Unreal Projects/CandyWarz_alpha/Content/MainMenu/PCBP_MainMenu.uasset",
+				"D:/work/Unreal Projects/CandyWarz_alpha/Content/MainMenu/WBP_MainMenu.uasset",
+				"D:/work/Unreal Projects/CandyWarz_alpha/Content/MainMenu/blockchain/blueprints/B_WalletSaveGame.uasset",
+				"D:/work/Unreal Projects/CandyWarz_alpha/Content/MainMenu/blockchain/blueprints/BP_Blockchain_Library.uasset",
+				"D:/work/Unreal Projects/CandyWarz_alpha/Content/MainMenu/IN_MangaeGameMode.uasset"
+			]
+		}
+	]
+}
