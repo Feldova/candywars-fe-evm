@@ -1,26 +1,34 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useGameStore } from '../stores/game'
 
+
+const router = useRouter()
+const gameStore = useGameStore()
 const openReadmeInEditor = () => fetch('/__open-in-editor?file=README.md')
 
-const network = ref('mainnet')
+const networks = ref(gameStore.networksList)
+const network = ref(networks.value[0].name)
 const walletAddress = ref('')
 
 const connectWallet = () => {
   // Logic to connect wallet and navigate to a new page
-  console.log(`Connecting wallet: ${walletAddress.value} on ${network.value}`)
-  // Add navigation logic here
+  console.log(`Connecting wallet: ${walletAddress.value} on ${network.name}`)
+  // navigate to the world view
+  gameStore.updateWallet(walletAddress.value)
+  router.push({ name: 'world' })
 }
 </script>
 
 <template>
   <div class="home-screen">
-    <h1 class="title">Candy Wars</h1>
     <div class="network-selector">
       <label for="network">Choose Network:</label>
       <select id="network" v-model="network">
-        <option value="mainnet">Mainnet</option>
-        <option value="testnet">Testnet</option>
+        <option v-for="network in networks" :key="network.chainId" :value="network.name">
+          {{ network.name }}
+        </option>
       </select>
     </div>
     <div class="wallet-input">
@@ -44,6 +52,11 @@ const connectWallet = () => {
 .title {
   font-size: 2em;
   margin-bottom: 20px;
+}
+
+.network-selector {
+  display: flex;
+  flex-direction: row;
 }
 
 .network-selector,

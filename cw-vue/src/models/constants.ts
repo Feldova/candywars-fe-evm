@@ -1,0 +1,1 @@
+export const ApiMap = {'Dev': 'http://localhost:3000', 'Prod': 'https://api.example.com'};
