@@ -1,6 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { networks, Network } from '../models/network-chains'
+import { walletAddressRegex } from '@/models/constants'
+import type { City, Location } from '../models/types';
 
 export const useGameStore = defineStore('game', () => {
   const storedWalletAddress = localStorage.getItem('walletAddress') || '';
@@ -8,10 +10,15 @@ export const useGameStore = defineStore('game', () => {
   const networksList = ref(networks);
   const selectedNewtwork = ref(networks[0]);
   const selectedCity = ref<City | null>(null);
+  const selectedLocation = ref<Location | null>(null);
 
-  function updateWallet(addr: string) {
-    localStorage.setItem('walletAddress', addr);
-    walletAddress.value = addr;
+  function updateWallet(addr: string): Boolean {
+    if (walletAddressRegex.test(addr)) {
+      localStorage.setItem('walletAddress', addr);
+      walletAddress.value = addr;
+      return true;
+    }
+    return false;
   }
 
   function updateNetwork(network: Network) {
@@ -24,7 +31,7 @@ export const useGameStore = defineStore('game', () => {
   }
 
   return {
-    walletAddress, networksList, selectedNewtwork, selectedCity,
+    walletAddress, networksList, selectedNewtwork, selectedCity, selectedLocation,
     setSelectedCity, updateNetwork, updateWallet
   }
 })

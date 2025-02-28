@@ -6,7 +6,6 @@ import { useGameStore } from '../stores/game'
 
 const router = useRouter()
 const gameStore = useGameStore()
-const openReadmeInEditor = () => fetch('/__open-in-editor?file=README.md')
 
 const networks = ref(gameStore.networksList)
 const network = ref(networks.value[0].name)
@@ -14,10 +13,12 @@ const walletAddress = ref('')
 
 const connectWallet = () => {
   // Logic to connect wallet and navigate to a new page
-  console.log(`Connecting wallet: ${walletAddress.value} on ${network.name}`)
+  
   // navigate to the world view
-  gameStore.updateWallet(walletAddress.value)
-  router.push({ name: 'world' })
+  if (gameStore.updateWallet(walletAddress.value)) {
+    console.log(`Connecting wallet: ${walletAddress.value} on ${network.value}`);
+    router.push({ name: 'world' });
+  } 
 }
 </script>
 

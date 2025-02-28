@@ -7,21 +7,31 @@
         <div class="content">
             <div class="cities-list">
                 <h2>Cities</h2>
-                <h3>NA</h3>
-                <ul>
-                    <li v-for="city in cities" :key="city.id" @click="selectCity(city)">
-                        {{ city.name }}
-                    </li>
-                </ul>
-                <h3>SA</h3>
-                <ul>
-                    <li v-for="city in southAmericanCities" :key="city.id" @click="selectCity(city)">
-                        {{ city.name }}
-                    </li>
-                </ul>
+                <div>                
+                    <h3>NA</h3>
+                    <ul>
+                        <li v-for="city in cities" :key="city.id" @click="selectCity(city)">
+                            {{ city.name }}
+                        </li>
+                    </ul>
+                    <h3>SA</h3>
+                    <ul>
+                        <li v-for="city in southAmericanCities" :key="city.id" @click="selectCity(city)">
+                            {{ city.name }}
+                        </li>
+                    </ul>
+                </div>
+                <div>                
+                    <h3>Europe</h3>
+                    <ul>
+                        <li v-for="city in europeanCities" :key="city.id" @click="selectCity(city)">
+                            {{ city.name }}
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="city-details" v-if="selectedCity">
-                <h3>{{ selectedCity.name }}</h3>
+                <h2>{{ selectedCity.name }}</h2>
                 <p>{{ selectedCity.description }}</p>
                 <button @click="openCity" class="open-city-button">Open City</button>
             </div>
@@ -33,16 +43,11 @@
 import { ref } from 'vue';
 import { useGameStore } from '../stores/game';
 import { useRouter } from 'vue-router';
+import type { City } from '../models/types';
 
 const router = useRouter();
 const gameStore = useGameStore()
 
-interface City {
-    id: number;
-    name: string;
-    description: string;
-    image?: string;
-}
 
 const walletAddress = ref(gameStore.walletAddress);
 const balance = ref(0); // Replace with actual balance
@@ -58,13 +63,18 @@ const southAmericanCities = ref<City[]>([
     { id: 5, name: 'Santiago', description: 'Description of City 5' },
     { id: 6, name: 'Lima', description: 'Description of City 6' },
 ]);
+const europeanCities = ref<City[]>([
+    { id: 7, name: 'Paris', description: 'Description of City 7' },
+    { id: 8, name: 'Berlin', description: 'Description of City 8' },
+    { id: 9, name: 'London', description: 'Description of City 9' },
+]);
 const selectedCity = ref<City | null>(null);
 
 function selectCity(city: City) {
     selectedCity.value = city;
 }
 function openCity() {
-    gameStore.setSelectedCity = selectedCity.value;
+    gameStore.setSelectedCity(selectedCity.value!);
     localStorage.setItem('city', selectedCity.value!.name);
     router.push({ name: 'game' });
 }
@@ -73,7 +83,7 @@ function openCity() {
 <style scoped>
 .open-city-button {
     position: absolute;
-    bottom: 20px;
+    bottom: 40px;
 }
 .world-view {
     padding: 20px;

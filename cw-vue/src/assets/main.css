@@ -59,6 +59,9 @@ a:visited {
 #nav a:hover {
   opacity: 1;
 }
+#nave h1 {
+  margin: auto;
+}
 #logo {
   font-weight: bold;
   font-size: 1.5rem;
