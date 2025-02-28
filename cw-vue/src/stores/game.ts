@@ -1,8 +1,10 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { networks, Network } from '../models/network-chains'
 import { walletAddressRegex } from '@/models/constants'
-import type { City, Location } from '../models/types';
+import candyImgUrl from '@/assets/images/candy/candy_usdc.jpg'
+import chocoWaferImgUrl from '@/assets/images/candy/choco_wafers.jpg'
+import type { City, Location, UserCandyItem, StoreCandyItem } from '../models/types';
 
 export const useGameStore = defineStore('game', () => {
   const storedWalletAddress = localStorage.getItem('walletAddress') || '';
@@ -11,6 +13,12 @@ export const useGameStore = defineStore('game', () => {
   const selectedNewtwork = ref(networks[0]);
   const selectedCity = ref<City | null>(null);
   const selectedLocation = ref<Location | null>(null);
+  const userInventory = ref<UserCandyItem[]>([
+    { candy: { id: '1', name: 'Candy USDC', symbol: 'CUSDC', image: candyImgUrl }, quantity: 1000 },
+  ]);
+  const storeInventory = ref<StoreCandyItem[]>([
+    { candy: { id: '2', name: 'Choco Wafer', symbol: 'CHOW', image: chocoWaferImgUrl }, price: 20, quantity: 5 },
+  ]);
 
   function updateWallet(addr: string): Boolean {
     if (walletAddressRegex.test(addr)) {
@@ -32,6 +40,7 @@ export const useGameStore = defineStore('game', () => {
 
   return {
     walletAddress, networksList, selectedNewtwork, selectedCity, selectedLocation,
+    userInventory, storeInventory,
     setSelectedCity, updateNetwork, updateWallet
   }
 })

@@ -8,6 +8,7 @@ body {
   margin: 0;
   margin-top: 150px;
   background: #eee;
+  font-family: 'Pixel', sans-serif;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -183,4 +184,9 @@ a {
   padding: 10px;
   border-radius: 5px;
   border:none;
+}
+
+.candy-image {
+  width: 100%;
+  max-width: 64px;
 }

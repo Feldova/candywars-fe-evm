@@ -81,6 +81,10 @@ function openCity() {
 </script>
 
 <style scoped>
+
+.world-view {
+  background-color:cornflowerblue;
+}
 .open-city-button {
     position: absolute;
     bottom: 40px;
