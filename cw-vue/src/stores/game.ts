@@ -13,6 +13,16 @@ export const useGameStore = defineStore('game', () => {
   const selectedNewtwork = ref(networks[0]);
   const selectedCity = ref<City | null>(null);
   const selectedLocation = ref<Location | null>(null);
+  
+  
+  const cityLocations = ref<Location[]>([
+    { id: 1, name: 'School' },
+    { id: 1, name: 'Gas Station' },
+    { id: 1, name: 'Park' },
+    { id: 1, name: 'Go Kart Track' },
+    { id: 1, name: 'Bus Station' },
+  ]);
+
   const userInventory = ref<UserCandyItem[]>([
     { candy: { id: '1', name: 'Candy USDC', symbol: 'CUSDC', image: candyImgUrl }, quantity: 1000 },
   ]);
@@ -35,12 +45,14 @@ export const useGameStore = defineStore('game', () => {
   }
 
   function setSelectedCity(city: City) {
+    localStorage.setItem('selectedCity', city.name);
     selectedCity.value = city;
   }
 
+  function travelToLocation() {}
   return {
     walletAddress, networksList, selectedNewtwork, selectedCity, selectedLocation,
-    userInventory, storeInventory,
-    setSelectedCity, updateNetwork, updateWallet
+    userInventory, storeInventory, cityLocations,
+    setSelectedCity, updateNetwork, updateWallet, travelToLocation
   }
 })

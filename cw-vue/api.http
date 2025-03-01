@@ -1,0 +1,18 @@
+@host = localhost:3002
+### Create User
+# @name createUser
+POST http://{{host}}/api/v1/user/create
+
+Content-Type: application/json
+
+{
+    "wallet": "0x33F864cd11e7d05dAEB5600E34FdB24E9A99571F"
+}
+
+@token = {{createUser.response.body.jwt}}
+
+### Start Game
+POST http://{{host}}/api/v1/game/startGame
+
+Content-Type: application/json
+Authorization: Bearer {{ token }}

@@ -8,6 +8,7 @@ const gameStore = useGameStore()
 const router = useRouter()
 
 const storefrontLocation = ref('School')
+localStorage.setItem('firstGame', 'no')
 
 const navigateBack = () => {
     router.push({ name: 'game' })
@@ -33,13 +34,15 @@ const sellItem = (item: UserCandyItem) => {
         <div class="columns">
             <div class="column">
                 <h2 class="list-title">Inventory</h2>
-                <ul class="menu-list">
-                    <li v-for="item in gameStore.userInventory" :key="item.candy.id" @click="sellItem(item)">
-                        <img class="candy-image" :src="item.candy.image" alt="candy image" />
-                        <span>{{ item.candy.name }}</span>
-                        <span>{{ item.quantity }}</span>
-                    </li>
-                </ul>
+                <div class="menu-list">
+                    <Card class="menu-item" v-for="item in gameStore.userInventory" :key="item.candy.id" @click="sellItem(item)">
+                        <template #content>
+                            <img class="candy-image" :src="item.candy.image" alt="candy image" />
+                            <span>{{ item.candy.name }}</span>
+                            <span>{{ item.quantity }}</span>
+                        </template>
+                    </Card>
+                </div>
             </div>
             <div class="column">
                 <h2 class="list-title">Store</h2>
@@ -89,7 +92,7 @@ body {
     list-style-type: none;
     padding: 0;
 }
-.menu-list li {
+.menu-item {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;

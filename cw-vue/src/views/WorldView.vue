@@ -1,49 +1,8 @@
-<template>
-    <div class="world-view">
-        <div class="wallet-info">
-            <p>Wallet Address: {{ walletAddress }}</p>
-            <p>Balance: {{ balance }} {{ currencyType }}</p>
-        </div>
-        <div class="content">
-            <div class="cities-list">
-                <h2>Cities</h2>
-                <div>                
-                    <h3>NA</h3>
-                    <ul>
-                        <li v-for="city in cities" :key="city.id" @click="selectCity(city)">
-                            {{ city.name }}
-                        </li>
-                    </ul>
-                    <h3>SA</h3>
-                    <ul>
-                        <li v-for="city in southAmericanCities" :key="city.id" @click="selectCity(city)">
-                            {{ city.name }}
-                        </li>
-                    </ul>
-                </div>
-                <div>                
-                    <h3>Europe</h3>
-                    <ul>
-                        <li v-for="city in europeanCities" :key="city.id" @click="selectCity(city)">
-                            {{ city.name }}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="city-details" v-if="selectedCity">
-                <h2>{{ selectedCity.name }}</h2>
-                <p>{{ selectedCity.description }}</p>
-                <button @click="openCity" class="open-city-button">Open City</button>
-            </div>
-        </div>
-    </div>
-</template>
-
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useGameStore } from '../stores/game';
+import { useGameStore } from '@/stores/game';
 import { useRouter } from 'vue-router';
-import type { City } from '../models/types';
+import type { City } from '@/models/types';
 
 const router = useRouter();
 const gameStore = useGameStore()
@@ -68,6 +27,7 @@ const europeanCities = ref<City[]>([
     { id: 8, name: 'Berlin', description: 'Description of City 8' },
     { id: 9, name: 'London', description: 'Description of City 9' },
 ]);
+
 const selectedCity = ref<City | null>(null);
 
 function selectCity(city: City) {
@@ -80,6 +40,49 @@ function openCity() {
 }
 </script>
 
+<template>
+    <Card class="world-view">
+        <template #content>
+            <div class="wallet-info">
+                <p>Wallet Address: {{ walletAddress }}</p>
+                <p>Balance: {{ balance }} {{ currencyType }}</p>
+            </div>
+            <div class="content">
+                <div class="cities-list">
+                    <h2>Cities</h2>
+                    <div>                
+                        <h3>NA</h3>
+                        <ul>
+                            <li v-for="city in cities" :key="city.id" @click="selectCity(city)">
+                                {{ city.name }}
+                            </li>
+                        </ul>
+                        <h3>SA</h3>
+                        <ul>
+                            <li v-for="city in southAmericanCities" :key="city.id" @click="selectCity(city)">
+                                {{ city.name }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div>                
+                        <h3>Europe</h3>
+                        <ul>
+                            <li v-for="city in europeanCities" :key="city.id" @click="selectCity(city)">
+                                {{ city.name }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="city-details" v-if="selectedCity">
+                    <h2>{{ selectedCity.name }}</h2>
+                    <p>{{ selectedCity.description }}</p>
+                    <button @click="openCity" class="open-city-button">Open City</button>
+                </div>
+            </div>
+        </template>
+    </Card>
+</template>
+
 <style scoped>
 
 .world-view {
@@ -90,6 +93,7 @@ function openCity() {
     bottom: 40px;
 }
 .world-view {
+    overflow: hidden;
     padding: 20px;
 }
 

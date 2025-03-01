@@ -23,6 +23,12 @@ const connectWallet = () => {
 </script>
 
 <template>
+  <div class="title">
+  <h1>
+    Candy <br />
+    Wars
+  </h1>
+</div>
   <div class="home-screen">
     <div class="home-input-container">
       <div class="network-selector">
@@ -58,13 +64,16 @@ const connectWallet = () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   text-align: center;
 }
 
 .title {
+  display: flex;
   font-size: 2em;
   margin-bottom: 20px;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
 }
 
 .network-selector {
